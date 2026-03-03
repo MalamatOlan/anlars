@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kadromuz | YolHaritası</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="header-left">
+          <a href="index.html" class="brand-logo-link">
+            <div class="brand-logo"><img src="images/logo.png" alt="YolHaritası Logo"></div>
+          </a>
+          <div class="brand-text">
+            <span class="brand-title">YolHaritası</span>
+            <span class="brand-subtitle">YKS Koçluğu</span>
+          </div>
+        </div>
+        <nav class="header-nav" id="main-nav">
+          <a href="index.html">Ana Sayfa</a>
+          <a href="hakkimizda.html">Hakkımızda</a>
+          <a href="blog.html">Blog</a>
+          <a href="kadromuz.html" class="active">Kadromuz</a>
+          <a href="paketler.html">Paketler</a>
+          <a href="referanslar.html">Başarılar</a>
+          <a href="sss.html">SSS</a>
+          <a href="iletisim.html" class="nav-cta">İletişim</a>
+        </nav>
+        <button class="dark-mode-toggle" id="dark-mode-toggle" aria-label="Karanlık Mod">
+          <span class="toggle-sun">☀️</span>
+          <span class="toggle-moon">🌙</span>
+        </button>
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Menü">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero-section" style="padding: 100px 0 60px;">
+        <div class="container">
+          <div class="section-header center" style="margin-bottom: 48px;">
+            <span class="section-tag">Ekibimiz</span>
+            <h1>Kadromuz</h1>
+            <p>
+              Koçlukta en kritik şey yaklaşımdır. Biz; plan, takip ve deneme analizini tek
+              bir sistemde birleştirip öğrencilerimizi haftadan haftaya daha iyiye götürmeyi hedefliyoruz.
+            </p>
+          </div>
+        </div>
+      </section>
+    
+      <section class="section-spacing">
+        <div class="container">
+          <div class="team-grid" id="dynamic-coaches-grid">
+            <!-- Koçlar dinamik olarak yüklenecek -->
+          </div>
+    
+          <div class="cta-section cta-section-warm">
+            <h3>Sizin için en uygun koç kim?</h3>
+            <p>Kısa bir görüşmede seviyenizi dinleyip doğru koç ve pakete yönlendirelim.</p>
+            <div class="cta-buttons">
+              <a href="iletisim.html" class="btn btn-primary btn-lg">
+                <span>İletişim</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a href="paketler.html" class="btn btn-ghost btn-lg">Paketleri İncele</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <div class="brand-logo"><img src="images/logo.png" alt="YolHaritası Logo"></div>
+          <div class="footer-text">
+            <p class="footer-title">YolHaritası YKS Koçluğu</p>
+            <p class="footer-sub">Hayalini kurduğun bölüme birlikte yürüyelim.</p>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Ana Sayfa</a>
+          <a href="hakkimizda.html">Hakkımızda</a>
+          <a href="blog.html">Blog</a>
+          <a href="kadromuz.html">Kadromuz</a>
+          <a href="paketler.html">Paketler</a>
+          <a href="referanslar.html">Başarılar</a>
+          <a href="iletisim.html">İletişim</a>
+        </div>
+        <p class="footer-copy">&copy; 2025 YolHaritası. Tüm hakları saklıdır.</p>
+      </div>
+    </footer>
+    <script>
+      window.addEventListener('scroll', function() {
+        const header = document.querySelector('.site-header');
+        if (window.scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+      });
+
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.coach-card, .cta-section').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+
+      // ==================== DİNAMİK KOÇ YÜKLEME ====================
+      
+      function loadCoaches() {
+        const saved = localStorage.getItem('yks26_data');
+        if (!saved) return;
+        
+        const data = JSON.parse(saved);
+        
+        if (data.coaches && data.coaches.length > 0) {
+          const grid = document.getElementById('dynamic-coaches-grid');
+          if (grid) {
+            grid.innerHTML = data.coaches.map(coach => `
+              <div class="coach-card">
+                <div class="coach-photo-wrapper">
+                  ${coach.photo ? 
+                    `<img src="${coach.photo}" alt="${coach.name}" class="coach-photo" onerror="this.onerror=null; this.src=''; this.style.display='none'; this.parentElement.querySelector('.coach-avatar-fallback').style.display='flex';">` +
+                    `<div class="coach-avatar coach-avatar-fallback" style="display: none; width: 100%; height: 200px; font-size: 48px;">${coach.initials}</div>` :
+                    `<div class="coach-avatar" style="width: 100%; height: 200px; font-size: 48px;">${coach.initials}</div>`
+                  }
+                </div>
+                <div class="coach-header" style="padding: 0 4px;">
+                  <div class="coach-info">
+                    <h3>${coach.name}</h3>
+                    <p class="coach-role">${coach.role}</p>
+                  </div>
+                </div>
+                <p class="coach-text" style="padding: 0 4px;">${coach.shortDesc}</p>
+                <ul class="tags" style="padding: 0 4px;">
+                  ${coach.tags.map(tag => '<li>' + tag + '</li>').join('')}
+                </ul>
+              </div>
+            `).join('');
+            
+            // Yeni eklenen kartları observe et
+            document.querySelectorAll('.coach-card').forEach(el => {
+              el.style.opacity = '0';
+              el.style.transform = 'translateY(20px)';
+              el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+              observer.observe(el);
+            });
+          }
+        }
+      }
+      
+      // Sayfa yüklendiğinde koçları yükle
+      loadCoaches();
+      
+      // LocalStorage değişikliklerini dinle
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'yks26_data') {
+          loadCoaches();
+        }
+      });
+      
+      // Mobil menü toggle
+      document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+        document.getElementById('main-nav').classList.toggle('mobile-open');
+        this.classList.toggle('active');
+      });
+
+      // Dark mode toggle
+      const darkModeToggle = document.getElementById('dark-mode-toggle');
+      const body = document.body;
+      
+      // Check for saved dark mode preference
+      if (localStorage.getItem('yks26_dark_mode') === 'true') {
+        body.classList.add('dark-mode');
+      }
+      
+      darkModeToggle.addEventListener('click', function() {
+        body.classList.toggle('dark-mode');
+        localStorage.setItem('yks26_dark_mode', body.classList.contains('dark-mode'));
+      });
+    </script>
+  </body>
+</html>

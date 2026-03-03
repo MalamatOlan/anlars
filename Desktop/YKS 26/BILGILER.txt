@@ -1,0 +1,48 @@
+YOLHARITASI - YONETIM BILGILERI
+================================
+
+ADMIN PANEL
+-----------
+URL: admin.html
+Sifre: YolHrt2026!@#
+
+Not: Sifreyi unutursaniz admin.html dosyasindaki ADMIN_PASSWORD degiskeninden degistirebilirsiniz.
+
+
+ILETISIM BILGILERI (Guncellenmeli)
+-----------------------------------
+WhatsApp: https://wa.me/905551234567  (ORNEK - Kendi numaranizla degistirin)
+E-posta: info@yolharitasi.com  (ORNEK - Kendi emailinizle degistirin)
+
+
+DOSYA YAPISI
+------------
+/index.html         - Ana sayfa
+/kadromuz.html      - Kadromuz sayfasi
+/paketler.html      - Paketler sayfasi
+/iletisim.html      - Iletisim sayfasi
+/admin.html         - Admin paneli
+/styles.css         - Ana stil dosyasi
+/images/logo.png    - Site logosu
+
+
+OZELLIKLER
+----------
+- Tum icerik admin panelinden yonetilebilir
+- Basvurular otomatik olarak admin panelinde gorunur
+- localStorage kullanilir (veriler tarayicida saklanir)
+- Sifre korumali admin paneli
+- Mobil uyumlu responsive tasarim
+
+
+GUVENLIK UYARISI
+----------------
+! Bu statik bir HTML sitesidir.
+! Admin sifresi client-side (on-yuz) kontrol edilir.
+! Gercek guvenlik icin backend/server tarafi sifreleme gerekir.
+! Su anki haliyle basit bir koruma saglar.
+
+
+OLUSTURMA TARIHI
+----------------
+3 Mart 2026
